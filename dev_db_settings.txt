@@ -1,0 +1,7 @@
+Host      ec2-54-163-240-101.compute-1.amazonaws.com
+Database  d42eqkbg1mn56f
+User      obfkgjmcgshcyi
+Port      5432
+Password  8k89m0xejjPSXxPFFUVpQ70_fg 
+Psql      heroku pg:psql --app heroku-postgres-68627b64 HEROKU_POSTGRESQL_RED
+URL       postgres://obfkgjmcgshcyi:8k89m0xejjPSXxPFFUVpQ70_fg@ec2-54-163-240-101.compute-1.amazonaws.com:5432/d42eqkbg1mn56f 
