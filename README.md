@@ -1,5 +1,14 @@
 # Website for internal work purposes of Intelvideo Studio
 
+### TO-DO list
+
+1. Make login page work
+2. Create **/public/** folder for static files
+3. Make page for users to change info about them
+4. Test *'socket.io'* package by displaying list of users who is online on the main page
+
+*to be continued...*
+
 ### Folders structure
 
 **middleware/** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- all technical staff, e. g. server settings, global variables, DB connection
