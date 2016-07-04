@@ -1,5 +1,4 @@
 var db = require('../middleware/db');
-var session = require('express-session');
 
 exports.start_page = function (req, res) {
 	res.render('../template/login_page');
@@ -21,9 +20,7 @@ exports.start_page = function (req, res) {
 	res.redirect('/main');
 };
 
-exports.main_page = function (req, res) {
-	check_cookies(req, res);
-	
+exports.main_page = function (req, res) {	
 	var login = req.session.login;
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
