@@ -1,8 +1,8 @@
 var pg = require('pg'),
 	db_url = 'postgres://obfkgjmcgshcyi:8k89m0xejjPSXxPFFUVpQ70_fg@ec2-54-163-240-101.compute-1.amazonaws.com:5432/d42eqkbg1mn56f';
 
-exports.get_user = function (login, callback) {
-	pq.connect(db_url, function(err, client, done) {
+exports.get_user_by_login = function (login, callback) {
+	pg.connect(db_url, function(err, client, done) {
 		var handleError = function (err) {
             if(!err) return false;
             done(client);
