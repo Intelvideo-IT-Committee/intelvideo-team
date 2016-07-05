@@ -1,8 +1,11 @@
-var db = require('../middleware/db');
+var db = require('../middleware/db'),
+	session = require('express-session');
 
-exports.start_page = function (req, res) {
+exports.login_page = function (req, res) {
 	res.render('../template/login_page');
-	
+};
+
+exports.login_check_page = function (req, res) {	
 	var login = req.body.login, //User's login
 		pass = req.body.password; //User's password
 	
@@ -13,11 +16,12 @@ exports.start_page = function (req, res) {
 		if (users[0].pass == pass) {
 			//if pass is right
 			req.session.login = login;
+			res.redirect('/');
 		} else {
-			//Print alert
+			//If password is not correct
+			res.redirect('/login');
 		}
 	});
-	res.redirect('/main');
 };
 
 exports.main_page = function (req, res) {	

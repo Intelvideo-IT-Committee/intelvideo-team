@@ -10,5 +10,6 @@ var check_cookies = function (req, res, next) {
 
 module.exports = function (app) {
 	app.get('/', check_cookies, main.main_page);
-	app.get('/login*', check_cookies,main.start_page);
+	app.get('/login', main.login_page);
+	app.post('/login', main.login_check_page)
 };
