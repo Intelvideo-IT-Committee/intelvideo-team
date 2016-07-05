@@ -1,6 +1,8 @@
 var router = require('../route'),
 	session = require('express-session'),
-	ejs = require('ejs-locals');
+	ejs = require('ejs-locals'),
+	bodyParser = require('body-parser'),
+	path = require('path');
 
 
 module.exports = function (app, express) {
@@ -13,8 +15,11 @@ module.exports = function (app, express) {
 	app.set('views', 'views');
 	app.set('view engine', 'ejs');
 	
-	//Inicialization directory with constant var
-	//app.use('/pubic', express.static(path.join(__dirname, '../public')));
+	//Initialization directory with constant var
+	app.use('/pubic', express.static(path.join(__dirname, '../public')));
+	
+	//
+	app.use(bodyParser.urlencoded({ extended: false }));
 	
 	//Cookies settings
 	app.use(session({
