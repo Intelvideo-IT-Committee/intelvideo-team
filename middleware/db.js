@@ -3,7 +3,7 @@ var pg = require('pg'),
 
 exports.get_user_by_login = function (login, callback) {
 	pg.connect(db_url, function(err, client, done) {
-		/*var handleError = function (err) {
+		var handleError = function (err) {
             if(!err) return false;
             done(client);
             res.writeHead(500, {'content-type': 'text/plain'});
@@ -12,17 +12,20 @@ exports.get_user_by_login = function (login, callback) {
         };
 		
 		if(!handleError) {return true;};
-		*/
-		console.log(client);
-		console.log(err);
+		
+		console.log(login);
 		
 		//Choose rows with same login
 		var qstring = "SELECT * FROM users WHERE login = '" + login + "';"; 
 		var query = client.query(qstring);
+		var cnt = 0;	
 		
 		query.on('row', function (row, result) {
 			result.addRow(row);
+			cnt += 1;
 		});
+		
+		console.log("Rows count in db answer: ", cnt);
 		
 		query.on('end', function (result) {
 			callback(result);
