@@ -16,7 +16,7 @@ module.exports = function (app, express) {
 	app.set('view engine', 'ejs');
 	
 	//Initialization directory with static files
-	app.use('/pubic', express.static(path.join(__dirname, '../public')));
+	app.use('/st', express.static(path.join(__dirname, '../public')));
 	
 	//
 	app.use(bodyParser.urlencoded({ extended: false }));

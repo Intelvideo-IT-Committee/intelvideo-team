@@ -9,11 +9,11 @@ exports.login_check_page = function (req, res) {
 	var login = req.body.login, //User's login
 		pass = req.body.password; //User's password
 	
-	console.log(login, ' ', pass);
+	//console.log(login, ' ', pass);
 	
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
-		console.log(user);
+		//console.log(user);
 		//Checking password
 		if (user.length === 0 || user[0].pass != pass) {
 			res.render('../template/login_page', {status: "Error - wrong password or login"})
