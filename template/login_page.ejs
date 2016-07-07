@@ -2,57 +2,9 @@
 <html>
 	<head>
 	</head>
-
-	<style>
-		body {
-			margin: 0px;
-		}
-
-		form {
-			width: 400px;
-			height: 100%;
-			margin: auto;
-			text-align: center;
-		}
-
-		img {
-
-			margin: 50px 0px 50px 0px;
-		}
-
-		input {
-			color: #555;
-			width: 380px;
-			border-width: 0px;
-			border-top-width: 1px;
-			font-size: 20pt;
-			padding: 10px;
-			text-align: center;
-			border-style: solid;
-			border-color: #ddd;
-		}
-
-		button {
-			color: #555;
-			border-color: #ddd;
-			width: 100%;
-			background-color: white;
-			border-width: 1px;
-			border-style: solid;
-			font-size: 20pt;
-			height: 60px;
-			border-radius: 0px 0px 10px 10px;
-		}
-
-		/* HACKS FOR PLACEHOLDER COLOR */
-		::-webkit-input-placeholder {color:#bbb;}
-		::-moz-placeholder          {color:#bbb;}/* Firefox 19+ */
-		:-moz-placeholder           {color:#bbb;}/* Firefox 18- */
-		:-ms-input-placeholder      {color:#bbb;}
-
-	</style>
-
 	<body>
+		<span><%= status %></span>
+		
 		<form method = "post" action="">
 			<img src="http://placehold.it/300x300">
 			<input name="login" id="login" type="text" placeholder="Логин">

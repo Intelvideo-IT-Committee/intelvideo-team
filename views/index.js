@@ -2,7 +2,7 @@ var db = require('../middleware/db'),
 	session = require('express-session');
 
 exports.login_page = function (req, res) {
-	res.render('../template/login_page');
+	res.render('../template/login_page', {status: ""});
 };
 
 exports.login_check_page = function (req, res) {	
@@ -15,14 +15,12 @@ exports.login_check_page = function (req, res) {
 		var user = query.rows;
 		console.log(user);
 		//Checking password
-		if (user[0].pass == pass) {
-			console.log('right pass')
-			//if pass is right
+		if (user.length === 0 || user[0].pass != pass) {
+			res.render('../template/login_page', {status: "Error - wrong password or login"})
+		} else {
+			console.log('User with login: ', login, ' logged in')
 			req.session.login = login;
 			res.redirect('/');
-		} else {
-			//If password is not correct
-			res.redirect('/login');
 		}
 	});
 };

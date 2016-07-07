@@ -15,7 +15,7 @@ module.exports = function (app, express) {
 	app.set('views', 'views');
 	app.set('view engine', 'ejs');
 	
-	//Initialization directory with constant var
+	//Initialization directory with static files
 	app.use('/pubic', express.static(path.join(__dirname, '../public')));
 	
 	//
