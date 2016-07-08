@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<form action="/info/change_password" method="post">
+			<p>Ваш текуший пароль: <%= pass %></p>
+			<input name="new_pass" type="text" placeholder="Введите новый пароль">
+			<button type="submit">Изменить</button>
+		</form>
+		
+		<form action="/info/change_picture" method="post">
+			<p>Ваша картинка: <%= userpic %></p>
+			<input name="new_pic" type="text" placeholder="Выберите новое изображение">
+			<button type="submit">Изменить</button>
+		</form>
+		
+		
+		<form action="/" method="get">
+			<button type="submit">Назад</button>
+		</form>
+	</body>
+</html>

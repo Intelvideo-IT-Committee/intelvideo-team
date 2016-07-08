@@ -33,3 +33,32 @@ exports.main_page = function (req, res) {
 		res.render('../template/main_page', {login: user[0].login, pass: user[0].pass, userpic: user[0].userpic});
 	});
 };
+
+exports.info_page = function (req, res) {
+	var login = req.session.login;
+	
+	db.get_user_by_login(login, function (query) {
+		var user = query.rows;
+		res.render('../template/info_page', {pass: user[0].pass, userpic: user[0].userpic});
+	});
+};
+
+exports.change_password_page = function (req, res) {
+	var login = req.session.login, 
+		new_pass = req.body.new_pass;
+	
+	db.change_user_password(login, new_pass, function (query) {
+		console.log(login, "has changed his password to", new_pass);
+		res.redirect('/info');
+	});
+};
+
+exports.change_user_picture_page = function (req, res) {
+	var login = req.session.login,
+		new_pic = req.body.new_pic;
+	
+	db.change_user_picture(login, new_pic, function (query) {
+		console.log(login, "has changed his picture to", new_pic);
+		res.redirect('/info');
+	});
+};

@@ -9,6 +9,9 @@
 		<br>
 		<%= userpic %>
 		<br>
+		<form method="get" action="/info">
+			<button type="submit">Профиль</button>
+		</form>
 		<form method="get" action="/login">
 			<button type="submit" onclick="req.session.destroy(function(err){})">Logает</button>
 		</form>

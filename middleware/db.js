@@ -49,7 +49,7 @@ exports.change_user_password = function(login, new_user_pass, callback) {
 		//console.log(login);
 		
 		//Choose rows with same login
-		var qstring = "UPDATE users SET pass = '" + new_user_pass + "WHERE login = '" + login + "';"; 
+		var qstring = "UPDATE users SET pass = '" + new_user_pass + "' WHERE login = '" + login + "';"; 
 		var query = client.query(qstring);
 		var cnt = 0;	
 		
@@ -82,7 +82,7 @@ exports.change_user_picture = function(login, new_user_pic, callback) {
 		//console.log(login);
 		
 		//Choose rows with same login
-		var qstring = "UPDATE users SET userpic = '" + new_user_pic + "WHERE login = '" + login + "';"; 
+		var qstring = "UPDATE users SET userpic = '" + new_user_pic + "' WHERE login = '" + login + "';"; 
 		var query = client.query(qstring);
 		var cnt = 0;	
 		
