@@ -1,5 +1,6 @@
 var db = require('../middleware/db'),
-	session = require('express-session');
+	session = require('express-session'),
+	utils = require('../middleware/utils');
 
 exports.login_page = function (req, res) {
 	res.render('../template/login_page', {status: ""});
@@ -9,7 +10,10 @@ exports.login_check_page = function (req, res) {
 	var login = req.body.login, //User's login
 		pass = req.body.password; //User's password
 	
-	//console.log(login, ' ', pass);
+	login = utils.sanitize_user_info(login),
+		pass = utils.sanitize_user_info(pass);
+	
+	console.log(login, ' ', pass);
 	
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
@@ -61,4 +65,11 @@ exports.change_user_picture_page = function (req, res) {
 		console.log(login, "has changed his picture to", new_pic);
 		res.redirect('/info');
 	});
+};
+
+exports.exit = function (req, res) {
+	req.session.destroy(function(err){
+					
+	});
+	res.redirect('/login');
 };

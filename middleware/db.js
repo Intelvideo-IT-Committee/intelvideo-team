@@ -13,10 +13,11 @@ exports.get_user_by_login = function (login, callback) {
 		
 		if(!handleError) {return true;};
 		
-		//console.log(login);
+		console.log("lol");
 		
 		//Choose rows with same login
-		var qstring = "SELECT * FROM users WHERE login = '" + login + "';"; 
+		var qstring = "SELECT * FROM users WHERE login = '" + login + "';";
+		console.log(qstring);
 		var query = client.query(qstring);
 		var cnt = 0;	
 		

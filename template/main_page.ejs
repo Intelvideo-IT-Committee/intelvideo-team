@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script>
+			function delete_cookies() {
+
+			};
+		</script>
 	</head>
 	<body>
 		<%= login %>
@@ -12,8 +17,8 @@
 		<form method="get" action="/info">
 			<button type="submit">Профиль</button>
 		</form>
-		<form method="get" action="/login">
-			<button type="submit" onclick="req.session.destroy(function(err){})">Logает</button>
+		<form method="post" action="/exit">
+			<button type="submit">Log out</button>
 		</form>
 	</body>
-</html>
+</html>	
