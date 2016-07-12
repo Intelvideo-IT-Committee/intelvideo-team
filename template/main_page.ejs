@@ -1,24 +1,106 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+		
 		<script>
-			function delete_cookies() {
-
+			var user = '<%= login %>';
+			var list = [];
+			console.log(user);
+			
+			var send_message = function () {
+				var data = $('#message_input').val();
+				$('#message_input').val('');
+				socket.emit('new_message', {
+					msg: data,
+					username: user
+				});
+				$('#chat').append("<p><b>" + user + "</b>: " + data + "</p>");
 			};
+			
+			//Функция отображения листа активных пользов
+			var draw_user_list = function () {
+				var list_str = '<p>' + list[0] + '</p>';
+				for (var i = 1; i < list.length; i++) {
+					list_str += '<p>';
+					list_str += list[i];
+					list_str += '</p>';
+				}
+				
+				$('#online-users-list').html(list_str);
+			}
+			
+			var socket = io();
+			//Сообщение серверу о входе
+			socket.emit('new_user_logged_in', user);
+			//Принятие списка пользователей
+			socket.on('send_user_list', function (user_list) {
+				console.log(user_list);
+				list = (user_list);
+				draw_user_list();
+			});
+			//Вошёл новый пользователь
+			socket.on('new_user_joined', function (user) {
+				list.push(user);
+				draw_user_list();
+			});
+			//Вышел другой пользователь
+			socket.on('delete_user', function (user) {
+				var i = users.indexOf(user);
+				users.splice(i, 1);
+				draw_user_list();
+			});
+			//Приходит новое сообщение
+			socket.on('new_message', function (data) {
+				console.log(data.username, ': ', data.msg);
+				$('#chat').append("<p><b>" + data.username + "</b>: " + data.msg + "</p>");
+			});
+			
+			
 		</script>
+		
+		<style>
+			.account-menu-cnt {
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+			
+			.chat-input {
+				margin: auto;
+			}
+			
+			.online-users-list {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
 	</head>
 	<body>
-		<%= login %>
-		<br>
-		<%= pass %>
-		<br>
-		<%= userpic %>
-		<br>
-		<form method="get" action="/info">
-			<button type="submit">Профиль</button>
-		</form>
-		<form method="post" action="/exit">
-			<button type="submit">Log out</button>
-		</form>
+		<div class="online-users-list" id="online-users-list">
+			
+		</div>
+		
+		<div class="chat-input">
+			<input type="text" id="message_input">
+			<button type="submit" onclick="send_message();">Отправить</button>			
+		</div>
+		
+		<div id="chat">
+		
+		</div>
+		
+		<div class="account-menu-cnt">
+			<%= login %>
+			<br>
+			<form method="get" action="/info">
+				<button type="submit">Профиль</button>
+			</form>
+			<form method="post" action="/exit">
+				<button type="submit">Log out</button>
+			</form>
+		</div>
 	</body>
 </html>	

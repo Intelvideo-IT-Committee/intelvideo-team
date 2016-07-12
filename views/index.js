@@ -13,7 +13,7 @@ exports.login_check_page = function (req, res) {
 	login = utils.sanitize_user_info(login),
 		pass = utils.sanitize_user_info(pass);
 	
-	console.log(login, ' ', pass);
+	//console.log(login, ' ', pass);
 	
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
@@ -31,10 +31,10 @@ exports.login_check_page = function (req, res) {
 
 exports.main_page = function (req, res) {	
 	var login = req.session.login;
-	console.log("Connection with main page by user with login: ", login);
+	//console.log("Connection with main page by user with login: ", login);
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
-		res.render('../template/main_page', {login: user[0].login, pass: user[0].pass, userpic: user[0].userpic});
+		res.render('../template/main_page', {users: [], login: user[0].login});
 	});
 };
 
