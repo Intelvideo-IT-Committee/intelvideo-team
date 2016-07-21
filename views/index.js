@@ -51,7 +51,7 @@ exports.change_password_page = function (req, res) {
 	var login = req.session.login, 
 		new_pass = req.body.new_pass;
 	
-	db.change_user_password(login, new_pass, function (query) {
+	db.change_user_info(login, new_pass, "pass", function (query) {
 		console.log(login, "has changed his password to", new_pass);
 		res.redirect('/info');
 	});
@@ -61,7 +61,7 @@ exports.change_user_picture_page = function (req, res) {
 	var login = req.session.login,
 		new_pic = req.body.new_pic;
 	
-	db.change_user_picture(login, new_pic, function (query) {
+	db.change_user_info(login, new_pic, "userpic", function (query) {
 		console.log(login, "has changed his picture to", new_pic);
 		res.redirect('/info');
 	});

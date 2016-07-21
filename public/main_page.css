@@ -1,0 +1,21 @@
+.account-menu-cnt {
+	float: right;
+	position: fixed;
+		
+	top: 0;
+	right: 0;
+}
+			
+.chat-input {
+	margin:auto;
+	
+}
+			
+.online-users-list {
+	float: left;
+	position: fixed;
+	
+	width: auto;
+	top: 0;
+	left: 0;
+}
