@@ -5,8 +5,8 @@ var express = require('express'),
 	io = require('socket.io')(http),
 	socket = require('./middleware/socket')(io);
 
-console.log(app.get('port'));
+//console.log(app.get('port'));
 
 http.listen(app.get('port'), function() {
-	console.log("Node app is running at port " + app.get('port'));
+	console.log("Server has started at port " + app.get('port'));
 });

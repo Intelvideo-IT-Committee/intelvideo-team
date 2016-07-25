@@ -13,6 +13,13 @@
 			
 			var send_message = function () {
 				var data = $('#message_input').val();
+				
+				//Screening
+				data = data.replace(/&/g, "&amp;");
+				data = data.replace(/</g, "&lt;");
+				data = data.replace(/>/g, "&gt;");
+				
+				//Sending the message
 				$('#message_input').val('');
 				socket.emit('new_message', {
 					msg: data,
@@ -71,7 +78,7 @@
 		</div>
 		
 		<div id="chat">
-		
+	
 		</div>
 		
 		<div class="account-menu-cnt">
