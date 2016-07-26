@@ -7,7 +7,7 @@ var router = require('../route'),
 
 module.exports = function (app, express) {
 	//Sets global variable 'port'
-	app.set('port', 8080); 
+	app.set('port', process.env.PORT); 
 	
 	//ejs settings
 	app.engine('html', ejs);
