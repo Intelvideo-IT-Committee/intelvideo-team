@@ -5,18 +5,19 @@ var socket = io();
 //Function sends message to other users
 var send_message = function () {
 	var data = $('#message_input').val();
-		
-	//Screening
-	data = data.replace(/&/g, "&amp;");
-	data = data.replace(/</g, "&lt;");
-	data = data.replace(/>/g, "&gt;");
-				
+					
 	//Sending message to other users
 	$('#message_input').val('');
+	/*console.log(data, ":", user);*/
 	socket.emit('new_message', {
 		msg: data,
 		username: user
 	});
+	
+	//Screening
+	data = data.replace(/&/g, "&amp;");
+	data = data.replace(/</g, "&lt;");
+	data = data.replace(/>/g, "&gt;");
 	
 	//Displaying message to the author
 	$('#chat').append("<p><b>" + user + "</b>: " + data + "</p>");
@@ -65,8 +66,11 @@ $(document).ready(function() {
 	});
 
 	//Приходит новое сообщение
-	socket.on('new_message', function (data) {
-		console.log(data.username, ': ', data.msg);
-		$('#chat').append("<p><b>" + data.username + "</b>: " + data.msg + "</p>");
+	socket.on('new_message', function (messages) {
+		$('#chat').val('');
+		for (var i = 0; i < messages.length; i += 1) {
+			console.log(messages[i].msgtime, '-', messages[i].author, ': ', messages[i].msgcontent);
+			$('#chat').append("<p>" + messages[i].msgtime + "<b>" + messages[i].author + "</b>: " + messages[i].msgcontent + "</p><br>");
+		};
 	});
 });
