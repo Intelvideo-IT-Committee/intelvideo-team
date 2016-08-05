@@ -68,6 +68,7 @@ exports.change_user_info = function (login, new_user_val, pole, callback) {
 	});
 };
 
+
 exports.add_message = function (message, author, date, chatid, callback) {
 	pg.connect(db_url, function(err, client, done) {
 		var handleError = function (err) {
@@ -109,6 +110,63 @@ exports.get_messages = function (chatid, callback) {
 		if(!handleError) {return true;};
 		
 		var qstring = "SELECT * FROM messages WHERE chatid = '" + chatid + "';";
+		var query = client.query(qstring);
+		var cnt = 0;
+		
+		query.on('row', function (row, result) {
+			result.addRow(row);
+			cnt += 1;
+		});
+		
+		query.on('end', function(result) {
+			callback(result);
+		});
+		done();
+	});
+};
+
+
+exports.add_chat = function (chat_name, chat_id, callback) {
+	pg.connect(db_url, function(err, client, done) {
+		var handleError = function (err) {
+            if(!err) return false;
+            done(client);
+            res.writeHead(500, {'content-type': 'text/plain'});
+            res.end('An error occurred');
+            return true;
+        };
+		
+		if(!handleError) {return true;};
+		
+		var qstring = "INSERT INTO chats VALUES ('" + chat_name + "', '" + chat_id + "');";
+		var query = client.query(qstring);
+		var cnt = 0;
+		
+		query.on('row', function (row, result) {
+			result.addRow(row);
+			cnt += 1;
+		});
+		
+		query.on('end', function(result) {
+			callback(result);
+		});
+		done();
+	});
+};
+
+exports.get_chats = function (callback) {
+	pg.connect(db_url, function(err, client, done) {
+		var handleError = function (err) {
+            if(!err) return false;
+            done(client);
+            res.writeHead(500, {'content-type': 'text/plain'});
+            res.end('An error occurred');
+            return true;
+        };
+		
+		if(!handleError) {return true;};
+		
+		var qstring = "SELECT * FROM chats;";
 		var query = client.query(qstring);
 		var cnt = 0;
 		

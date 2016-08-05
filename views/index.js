@@ -20,12 +20,29 @@ exports.login_check_page = function (req, res) {
 		//console.log(user);
 		//Checking password
 		if (user.length === 0 || user[0].pass != pass) {
-			res.render('../template/login_page', {status: "Error - wrong password or login"})
+			res.render('../template/login_page', {status: "Error - wrong password or login"});
 		} else {
-			console.log('User with login: ', login, ' logged in')
+			console.log('User with login: ', login, ' logged in');
 			req.session.login = login;
 			res.redirect('/');
 		}
+	});
+};
+
+exports.chats_page = function (req, res) {
+	db.get_chats(function (query) {
+		var chats = query.rows;
+		console.log(chats);
+		
+		var chatnames = [],
+			chatids = [];
+		for (var i = 0; i < chats.length; i += 1) {
+			chatnames.push(chats[i].chatname);
+			chatids.push(chats[i].id);
+		};
+		//console.log(chatids, chatnames);
+		
+		res.render('../template/chats_page', {chatnames: chatnames, chatids: chatids});
 	});
 };
 
