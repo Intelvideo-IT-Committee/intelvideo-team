@@ -126,7 +126,7 @@ exports.get_messages = function (chatid, callback) {
 };
 
 
-exports.add_chat = function (chat_name, chat_id, callback) {
+exports.add_chat = function (chat_name, callback) {
 	pg.connect(db_url, function(err, client, done) {
 		var handleError = function (err) {
             if(!err) return false;
@@ -138,7 +138,7 @@ exports.add_chat = function (chat_name, chat_id, callback) {
 		
 		if(!handleError) {return true;};
 		
-		var qstring = "INSERT INTO chats VALUES ('" + chat_name + "', '" + chat_id + "');";
+		var qstring = "INSERT INTO chats VALUES ('" + chat_name + "');";
 		var query = client.query(qstring);
 		var cnt = 0;
 		

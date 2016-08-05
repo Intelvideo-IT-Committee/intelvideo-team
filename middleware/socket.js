@@ -14,7 +14,7 @@ module.exports = function (io) {
 			socket.login = login;
 			
 			//Sending to new user list of messages
-			db.get_messages("0", function(query) {
+			db.get_messages("1", function(query) {
 				var messages = query.rows;
 				socket.emit('new_message', messages);
 			});
@@ -35,7 +35,7 @@ module.exports = function (io) {
 			author = utils.sanitize_user_info(author);
 			/*console.log(msg, ":", author);*/
 			
-			db.add_message(msg, author, "--:--:--", "0", function(query) {});
+			db.add_message(msg, author, "--:--:--", "1", function(query) {});
 			
 			db.get_messages("0", function(query) {
 				var messages = query.rows;
