@@ -45,27 +45,27 @@ $(document).ready(function() {
 	//
 	socket.emit('new_user_logged_in', user);
 
-	//Принятие списка пользователей
+	//Getting list of all users
 	socket.on('send_user_list', function (user_list) {
 		console.log(user_list);
 		list = (user_list);
 		draw_user_list();
 	});
 
-	//Вошёл новый пользователь
+	//Тew user logged into the chat
 	socket.on('new_user_joined', function (user) {
 		list.push(user);
 		draw_user_list();
 	});
 
-	//Вышел другой пользователь
+	//Another user exit came out chat
 	socket.on('delete_user', function (user) {
 		var i = list.indexOf(user);
 		list.splice(i, 1);
 		draw_user_list();
 	});
 
-	//Приходит новое сообщение
+	//New message arrives
 	socket.on('new_message', function (messages) {
 		$('#chat').val('');
 		for (var i = 0; i < messages.length; i += 1) {
