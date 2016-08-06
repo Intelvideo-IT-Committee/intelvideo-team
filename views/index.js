@@ -32,7 +32,7 @@ exports.login_check_page = function (req, res) {
 exports.chats_page = function (req, res) {
 	db.get_chats(function (query) {
 		var chats = query.rows;
-		console.log(chats);
+		//console.log(chats);
 		
 		var chatnames = [],
 			chatids = [];

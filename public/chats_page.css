@@ -1,7 +1,19 @@
 .chat {
 	background-color: aquamarine;
-	border-radius: 10%;
-	height: 40px;
+	border: 2px solid azure;
+	height: 50px;
 	width: all;
 	text-align: center;
+	text-decoration: none;
+}
+
+a:link {
+	text-decoration: none;
+	color: black;
+}
+
+.selected {
+	background-color: #00ff00;
+	color: #0000ff;
+	border-color: #bbbbff;
 }
