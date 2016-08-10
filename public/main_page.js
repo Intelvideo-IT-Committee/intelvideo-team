@@ -65,7 +65,7 @@ $(document).ready(function() {
 
 	//New message arrives
 	socket.on('new_message_' + id, function (messages) {
-		$('#chat').val('');
+		$('#chat').html("");
 		for (var i = 0; i < messages.length; i += 1) {
 			console.log(messages[i].msgtime, '-', messages[i].author, ': ', messages[i].msgcontent);
 			$('#chat').append("<p>" + messages[i].msgtime + "<b>" + messages[i].author + "</b>: " + messages[i].msgcontent + "</p><br>");
