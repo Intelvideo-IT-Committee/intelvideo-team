@@ -51,7 +51,7 @@ exports.main_page = function (req, res) {
 	//console.log("Connection with main page by user with login: ", login);
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
-		res.render('../template/main_page', {users: [], login: user[0].login});
+		res.render('../template/main_page', {login: user[0].login, id: req.params.id});
 	});
 };
 

@@ -1,4 +1,5 @@
-var user = '';
+var user = '',
+	id = '';
 var list = [];
 var socket = io();
 
@@ -11,16 +12,9 @@ var send_message = function () {
 	/*console.log(data, ":", user);*/
 	socket.emit('new_message', {
 		msg: data,
-		username: user
+		username: user, 
+		id: id
 	});
-	
-	//Screening
-	data = data.replace(/&/g, "&amp;");
-	data = data.replace(/</g, "&lt;");
-	data = data.replace(/>/g, "&gt;");
-	
-	//Displaying message to the author
-	$('#chat').append("<p><b>" + user + "</b>: " + data + "</p>");
 };
 			
 //Function draws list of online users
@@ -36,14 +30,18 @@ var draw_user_list = function () {
 }
 
 //Getting user's login
-var get_user_login = function (data) {
+var get_user_login = function (data, chat_id) {
 	user = data;
-	console.log(user);
+	id = chat_id;
+	//console.log(user, id);
 }
 
 $(document).ready(function() {
 	//
-	socket.emit('new_user_logged_in', user);
+	socket.emit('new_user_logged_in', {
+		login: user,
+		id: id
+	});
 
 	//Getting list of all users
 	socket.on('send_user_list', function (user_list) {
@@ -66,7 +64,7 @@ $(document).ready(function() {
 	});
 
 	//New message arrives
-	socket.on('new_message', function (messages) {
+	socket.on('new_message_' + id, function (messages) {
 		$('#chat').val('');
 		for (var i = 0; i < messages.length; i += 1) {
 			console.log(messages[i].msgtime, '-', messages[i].author, ': ', messages[i].msgcontent);
