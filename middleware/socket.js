@@ -38,7 +38,8 @@ module.exports = function (io) {
 			id = utils.sanitize_user_info(id);
 			/*console.log(msg, ":", author);*/
 			
-			db.add_message(msg, author, "--:--:--", id, function(query) {});
+			var time = utils.get_time();
+			db.add_message(msg, author, time, id, function(query) {});
 			
 			db.get_messages(id, function(query) {
 				var messages = query.rows;
