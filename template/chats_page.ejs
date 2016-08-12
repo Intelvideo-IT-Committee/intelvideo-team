@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<link rel="stylesheet" href="/st/chats_page.css"> 
 		
 		<!--<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>-->
@@ -24,6 +25,16 @@
 		</script>
 	</head>
 	<body>
+		<div id="dialog_button"></div>
+		<div id="new_dialog" class="hidden">
+			<form method="post" action="add_chat">
+				<p>Создание нового обсуждения</p>
+				<br>
+				<input type="text" id="chat_name" name="chat_name" placeholder="Название чата">
+				<br>
+				<button type="submit">Создать</button>
+			</form>
+		</div>		
 		<div id="chats_list">
 		
 		</div>

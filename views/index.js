@@ -46,6 +46,15 @@ exports.chats_page = function (req, res) {
 	});
 };
 
+exports.add_chat = function (req, res) {
+	var chat_name = req.body.chat_name;
+	chat_name = utils.sanitize_message(chat_name);
+	chat_name = utils.sanitize_user_info(chat_name);
+	
+	db.add_chat(chat_name, function (query) {});
+	res.redirect('/');
+};
+
 exports.main_page = function (req, res) {	
 	var login = req.session.login;
 	//console.log("Connection with main page by user with login: ", login);

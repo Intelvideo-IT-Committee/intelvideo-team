@@ -16,11 +16,15 @@ $(document).ready(function () {
 		$('#chats_list').append(current_chat);
 	};
 	
-	$('div').mouseenter(function () {
+	$('.chat').mouseenter(function () {
 		$(this).addClass("selected");
 	});
 	
-	$('div').mouseleave(function () {
+	$('.chat').mouseleave(function () {
 		$(this).removeClass("selected");
+	});
+	
+	$('#dialog_button').click(function () {
+		$('#new_dialog').toggleClass('hidden');
 	});
 });

@@ -20,6 +20,7 @@ var check_authorization = function (req, res, next) {
 module.exports = function (app) {
 	app.get('/', check_cookies, main.chats_page);
 	app.get('/chat/:id/', check_cookies, main.main_page);
+	app.post('/add_chat', check_cookies, main.add_chat);
 	
 	app.get('/login', check_authorization, main.login_page);
 	app.post('/login', main.login_check_page);

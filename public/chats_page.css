@@ -17,3 +17,32 @@ a:link {
 	color: #0000ff;
 	border-color: #bbbbff;
 }
+
+#new_dialog {
+	height: 100px;
+	width: 500px;
+	text-align: center;
+	background-color: #0000ff;
+	border-radius: 5%;
+	position: absolute;
+}
+
+#dialog_button {
+	margin-left: 80px;
+	height: 30px;
+	width: 30px;
+	border-radius: 100%;
+	background-color: grey;
+}
+
+#input {
+	width: 400px;
+}
+
+button {
+	width: 400px;
+}
+
+.hidden {
+	display: none;
+}
