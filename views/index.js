@@ -6,15 +6,15 @@ exports.login_page = function (req, res) {
 	res.render('../template/login_page', {status: ""});
 };
 
-exports.login_check_page = function (req, res) {	
+exports.login_check_page = function (req, res) {
 	var login = req.body.login, //User's login
 		pass = req.body.password; //User's password
-	
+
 	login = utils.sanitize_user_info(login),
 		pass = utils.sanitize_user_info(pass);
-	
+
 	//console.log(login, ' ', pass);
-	
+
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
 		//console.log(user);
@@ -29,11 +29,15 @@ exports.login_check_page = function (req, res) {
 	});
 };
 
-exports.chats_page = function (req, res) {
+exports.longread_creation = function(req, res) {
+	res.render('../template/longread_creation');
+};
+
+/*exports.chats_page = function (req, res) {
 	db.get_chats(function (query) {
 		var chats = query.rows;
 		//console.log(chats);
-		
+
 		var chatnames = [],
 			chatids = [];
 		for (var i = 0; i < chats.length; i += 1) {
@@ -41,7 +45,7 @@ exports.chats_page = function (req, res) {
 			chatids.push(chats[i].id);
 		};
 		//console.log(chatids, chatnames);
-		
+
 		res.render('../template/chats_page', {chatnames: chatnames, chatids: chatids});
 	});
 };
@@ -50,12 +54,12 @@ exports.add_chat = function (req, res) {
 	var chat_name = req.body.chat_name;
 	chat_name = utils.sanitize_message(chat_name);
 	chat_name = utils.sanitize_user_info(chat_name);
-	
+
 	db.add_chat(chat_name, function (query) {});
 	res.redirect('/');
 };
 
-exports.main_page = function (req, res) {	
+exports.main_page = function (req, res) {
 	var login = req.session.login;
 	//console.log("Connection with main page by user with login: ", login);
 	db.get_user_by_login(login, function (query) {
@@ -66,7 +70,7 @@ exports.main_page = function (req, res) {
 
 exports.info_page = function (req, res) {
 	var login = req.session.login;
-	
+
 	db.get_user_by_login(login, function (query) {
 		var user = query.rows;
 		res.render('../template/info_page', {pass: user[0].pass, userpic: user[0].userpic});
@@ -74,9 +78,9 @@ exports.info_page = function (req, res) {
 };
 
 exports.change_password_page = function (req, res) {
-	var login = req.session.login, 
+	var login = req.session.login,
 		new_pass = req.body.new_pass;
-	
+
 	db.change_user_info(login, new_pass, "pass", function (query) {
 		console.log(login, "has changed his password to", new_pass);
 		res.redirect('/info');
@@ -86,7 +90,7 @@ exports.change_password_page = function (req, res) {
 exports.change_user_picture_page = function (req, res) {
 	var login = req.session.login,
 		new_pic = req.body.new_pic;
-	
+
 	db.change_user_info(login, new_pic, "userpic", function (query) {
 		console.log(login, "has changed his picture to", new_pic);
 		res.redirect('/info');
@@ -95,7 +99,8 @@ exports.change_user_picture_page = function (req, res) {
 
 exports.exit = function (req, res) {
 	req.session.destroy(function(err){
-					
+
 	});
 	res.redirect('/login');
 };
+*/
