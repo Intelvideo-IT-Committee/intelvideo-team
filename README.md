@@ -9,6 +9,22 @@
 
 *to be continued...*
 
+### Colors
+
+1. Base **#FFF9E9**
+2. Dark-grey **#3D3D36**
+3. Light-grey **#B7B7BC**
+4. Yellow **#F8C62C**
+5. White **#FFFFFF**
+
+<div style="display:flex">
+    <div title="#91967A" style="width:10vw; height:10vw;background: #FFF9E9"></div>
+    <div title="#F8E4D1" style="width:10vw; height:10vw;background: #3D3D36">/</div>
+    <div title="#6F7864" style="width:10vw; height:10vw;background: #B7B7BC"></div>
+    <div title="#FEEBE7" style="width:10vw; height:10vw;background: #F8C62C"></div>
+    <div title="#FCEED9" style="width:10vw; height:10vw;background:#FFFFFF"></div>
+</div>
+
 ### Folders structure
 
 **middleware/** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- all technical staff, e. g. server settings, global variables, DB connection
