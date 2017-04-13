@@ -4,6 +4,7 @@
   <head>
     <link rel="stylesheet" href="/st/longread_creation.css"></link>
     <!--Input editor scripts here-->
+    <script src="/st/js/medium-editor.js"></script>
   </head>
   <body>
     <div class="header">
@@ -16,9 +17,12 @@
       <div class="longread__tegs form" contenteditable="true">
 
       </div>
-      <div class="longread__body form" contenteditable="true">
+      <div class="longread__body form editable" contenteditable="true">
 
       </div>
+      <script>
+        var editor = new MediumEditor('.editable');
+      </script>
     </div>
   </body>
 </html>
