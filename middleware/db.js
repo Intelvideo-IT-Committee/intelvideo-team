@@ -1,6 +1,78 @@
 var pg = require('pg'),
 	db_url = process.env.DATABASE_URL;
 
+//// Pass request string to the DB
+var __runRequest = function(qstring) {
+	return new Promise((resolve, reject) => {
+		pool.query(qstring, function (err, result) {
+			//console.log('db.js:20', result);
+      if(err) {
+				console.log("DB request:");
+        console.log(qstring);
+        console.log(JSON.stringify(err));
+        reject(err);
+      }
+      resolve(result.rows);
+		});
+	});
+}
+
+//// Prepare request string
+exports.createLongread = (author, date, callback) => {
+	var qstring = "INSERT INTO longreads VALUES";
+	qstring += " (' ', '" + author + "', '" + date + "', ' ', 'n', DEFAULT)";
+	qstring += " RETURNING id;"
+
+	__runRequest(qstring).then((result) => {
+		callback(result[0]);
+	}).catch((err) => {
+		console.log("ERROR : ", err);
+		callback(err);
+	});
+};
+
+exports.saveLongread = (id, title, content, callback) => {
+	var qstring = "UPDATE longreads SET title = '" + title + "', body = '" + content +
+		"' WHERE id = " + id + ";"
+
+		__runRequest(qstring).then(() => {
+			callback();
+		}).catch((err) => {
+			console.log("ERROR : ", err);
+			callback(err);
+		});
+};
+
+exports.getLongread = (id, callback) => {
+	var qstring = "SELECT * FROM longreads WHERE id = " + id + ";";
+
+	__runRequest(qstring).then((result) => {
+		callback(result[0]);
+	}).catch((err) => {
+			console.log("ERROR : ", err);
+			callback(err);
+	});
+};
+
+exports.publicateLongread = (id, callback) => {
+	getLongread(id, function (result) {
+		var qstring = "INSERT INTO longreads VALUES ('" +
+			result.title + "', '" + result.author + "', '" + result.creation_date +
+			"', '" + result.body + "', 'y', DEFAULT);";
+
+		__runRequest(qstring).then(() => {
+			callback();
+		}).catch((err) => {
+			console.log("ERROR : ", err);
+			callback(err);
+		});
+	});
+};
+
+// ------------------------------------------------------
+// ------------------- Out Of Date ----------------------
+// ------------------------------------------------------
+
 exports.get_user_by_login = function (login, callback) {
 	pg.connect(db_url, function(err, client, done) {
 		var handleError = function (err) {
@@ -10,28 +82,28 @@ exports.get_user_by_login = function (login, callback) {
             res.end('An error occurred');
             return true;
         };
-		
+
 		if(!handleError) {return true;};
-		
+
 		//console.log("lol");
-		
+
 		//Choose rows with same login
 		var qstring = "SELECT * FROM users WHERE login = '" + login + "';";
 		//console.log(qstring);
 		var query = client.query(qstring);
-		var cnt = 0;	
-		
+		var cnt = 0;
+
 		query.on('row', function (row, result) {
 			result.addRow(row);
 			cnt += 1;
 		});
-		
+
 		//console.log("Rows count in db answer: ", cnt);
-		
+
 		query.on('end', function (result) {
 			callback(result);
 		});
-		done();	
+		done();
 	});
 };
 
@@ -44,27 +116,27 @@ exports.change_user_info = function (login, new_user_val, pole, callback) {
             res.end('An error occurred');
             return true;
         };
-		
+
 		if(!handleError) {return true;};
-		
+
 		//console.log(login);
-		
+
 		//Choose rows with same login
-		var qstring = "UPDATE users SET " + pole + " = '" + new_user_val + "' WHERE login = '" + login + "';"; 
+		var qstring = "UPDATE users SET " + pole + " = '" + new_user_val + "' WHERE login = '" + login + "';";
 		var query = client.query(qstring);
-		var cnt = 0;	
-		
+		var cnt = 0;
+
 		query.on('row', function (row, result) {
 			result.addRow(row);
 			cnt += 1;
 		});
-		
+
 		//console.log("Rows count in db answer: ", cnt);
-		
+
 		query.on('end', function (result) {
 			callback(result);
 		});
-		done();	
+		done();
 	});
 };
 
@@ -78,18 +150,18 @@ exports.add_message = function (message, author, date, chatid, callback) {
             res.end('An error occurred');
             return true;
         };
-		
+
 		if(!handleError) {return true;};
-		
+
 		var qstring = "INSERT INTO messages VALUES ('" + author + "', '" + chatid + "', '" + message + "', '" + date + "');";
 		var query = client.query(qstring);
 		var cnt = 0;
-		
+
 		query.on('row', function (row, result) {
 			result.addRow(row);
 			cnt += 1;
 		});
-		
+
 		query.on('end', function(result) {
 			callback(result);
 		});
@@ -106,18 +178,18 @@ exports.get_messages = function (chatid, callback) {
             res.end('An error occurred');
             return true;
         };
-		
+
 		if(!handleError) {return true;};
-		
+
 		var qstring = "SELECT * FROM messages WHERE chatid = '" + chatid + "';";
 		var query = client.query(qstring);
 		var cnt = 0;
-		
+
 		query.on('row', function (row, result) {
 			result.addRow(row);
 			cnt += 1;
 		});
-		
+
 		query.on('end', function(result) {
 			callback(result);
 		});
@@ -135,18 +207,18 @@ exports.add_chat = function (chat_name, callback) {
             res.end('An error occurred');
             return true;
         };
-		
+
 		if(!handleError) {return true;};
-		
+
 		var qstring = "INSERT INTO chats VALUES ('" + chat_name + "');";
 		var query = client.query(qstring);
 		var cnt = 0;
-		
-		query.on('row', function (row, result) {
+
+		query.on('row', function (row, res	ult) {
 			result.addRow(row);
 			cnt += 1;
 		});
-		
+
 		query.on('end', function(result) {
 			callback(result);
 		});
@@ -163,18 +235,18 @@ exports.get_chats = function (callback) {
             res.end('An error occurred');
             return true;
         };
-		
+
 		if(!handleError) {return true;};
-		
+
 		var qstring = "SELECT * FROM chats;";
 		var query = client.query(qstring);
 		var cnt = 0;
-		
+
 		query.on('row', function (row, result) {
 			result.addRow(row);
 			cnt += 1;
 		});
-		
+
 		query.on('end', function(result) {
 			callback(result);
 		});
