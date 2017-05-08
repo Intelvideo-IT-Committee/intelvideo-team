@@ -18,13 +18,13 @@ var __runRequest = function(qstring) {
 }
 
 //// Prepare request string
-exports.createLongread = (author, date, callback) => {
+exports.createLongread = (author, date, status, callback) => {
 	var qstring = "INSERT INTO longreads VALUES";
-	qstring += " (' ', '" + author + "', '" + date + "', ' ', 'n', DEFAULT)";
+	qstring += " (' ', '" + author + "', '" + date + "', ' ', '" + status + "', DEFAULT)";
 	qstring += " RETURNING id;"
 
 	__runRequest(qstring).then((result) => {
-		callback(result[0]);
+		callback(result[0].id);
 	}).catch((err) => {
 		console.log("ERROR : ", err);
 		callback(err);
@@ -39,7 +39,7 @@ exports.saveLongread = (id, title, content, callback) => {
 			callback();
 		}).catch((err) => {
 			console.log("ERROR : ", err);
-			callback(err);
+			callback();
 		});
 };
 
@@ -56,15 +56,15 @@ exports.getLongread = (id, callback) => {
 
 exports.publicateLongread = (id, callback) => {
 	getLongread(id, function (result) {
-		var qstring = "INSERT INTO longreads VALUES ('" +
-			result.title + "', '" + result.author + "', '" + result.creation_date +
-			"', '" + result.body + "', 'y', DEFAULT);";
+		createLongread(result.author, result.date, 'y', function(result) {
+			var qstring = "UPDATE longreads SET public_id = " + result + " WHERE id = " + id + ";";
 
-		__runRequest(qstring).then(() => {
-			callback();
-		}).catch((err) => {
-			console.log("ERROR : ", err);
-			callback(err);
+			__runRequest(qstring).then(() => {
+				callback();
+			}).catch((err) => {
+				console.log("ERROR : ", err);
+				callback();
+			});
 		});
 	});
 };
@@ -214,7 +214,7 @@ exports.add_chat = function (chat_name, callback) {
 		var query = client.query(qstring);
 		var cnt = 0;
 
-		query.on('row', function (row, res	ult) {
+		query.on('row', function (row, result) {
 			result.addRow(row);
 			cnt += 1;
 		});
