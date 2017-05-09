@@ -1,5 +1,17 @@
-var pg = require('pg'),
-	db_url = process.env.DATABASE_URL;
+var Pool = require('pg').Pool,
+	pool = new Pool({
+		host: process.env.DB_HOST,
+		port: process.env.DB_PORT,
+		database: process.env.DB_NAME,
+		user: process.env.DB_USER,
+		password: process.env.DB_PASSWORD,
+		ssl: process.env.DB_USE_SSL,
+		idleTimeoutMillis: 1000
+	});
+
+//
+//	FIX ERROR HANDLER IN CALLBACK'S FUNCTIONS
+//
 
 //// Pass request string to the DB
 var __runRequest = function(qstring) {
@@ -18,6 +30,7 @@ var __runRequest = function(qstring) {
 }
 
 //// Prepare request string
+//Longreads
 exports.createLongread = (author, date, status, callback) => {
 	var qstring = "INSERT INTO longreads VALUES";
 	qstring += " (' ', '" + author + "', '" + date + "', ' ', '" + status + "', DEFAULT)";
@@ -69,11 +82,31 @@ exports.publicateLongread = (id, callback) => {
 	});
 };
 
-// ------------------------------------------------------
-// ------------------- Out Of Date ----------------------
-// ------------------------------------------------------
+exports.getPublicatedLongreads = (callback) => {
+	var qstring = "SELECT * FROM longreads WHERE published;";
 
-exports.get_user_by_login = function (login, callback) {
+	__runRequest(qstring).then((result) => {
+		callback(result);
+	}).catch((err) => {
+		console.log("ERROR : ", err);
+	});
+};
+
+//Users
+exports.getUserByLogin = (login, callback) => {
+	var qstring = "SELECT * FROM users WHERE login = '" + login + "';";
+
+	__runRequest(qstring).then((result) => {
+		callback(result);
+	}).catch((err) => {
+		console.log("ERROR : ", err);
+		callback(err);
+	});
+};
+
+
+// ------------------- Out Of Date ----------------------
+/*exports.get_user_by_login = function (login, callback) {
 	pg.connect(db_url, function(err, client, done) {
 		var handleError = function (err) {
             if(!err) return false;
@@ -253,3 +286,4 @@ exports.get_chats = function (callback) {
 		done();
 	});
 };
+*/
