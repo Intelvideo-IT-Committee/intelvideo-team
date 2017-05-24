@@ -1,21 +1,15 @@
-.account-menu-cnt {
-	float: right;
-	position: fixed;
-		
-	top: 0;
-	right: 0;
+.first-screen__wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: #F8C62C;
+    display: flex;
 }
-			
-.chat-input {
-	margin:auto;
-	
+
+#first-screen__logo {
+    width: 40vw;
 }
-			
-.online-users-list {
-	float: left;
-	position: fixed;
-	
-	width: auto;
-	top: 0;
-	left: 0;
+
+.first-screen__about {
+    width: 40vw;
+    border-left: 1px solid;
 }
