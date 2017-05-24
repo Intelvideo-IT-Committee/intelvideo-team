@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="/st/main_page.css"> 
-		
+		<link rel="stylesheet" href="/st/main_page.css">
+
 		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-		
+
 		<script src="/st/main_page.js"></script>
-		
+
 		<script>
 			var user = '<%= login %>';
 			var id = '<%= id %>';
@@ -16,16 +16,16 @@
 	</head>
 	<body>
 		<div class="online-users-list" id="online-users-list"></div>
-		
+
 		<div class="chat-input">
 			<input type="text" id="message_input">
-			<button type="submit" onclick="send_message();">Отправить</button>			
+			<button type="submit" onclick="send_message();">Отправить</button>
 		</div>
-		
+
 		<div id="chat">
-	
+
 		</div>
-		
+
 		<div class="account-menu-cnt">
 			<%= login %>
 			<br>
@@ -37,4 +37,4 @@
 			</form>
 		</div>
 	</body>
-</html>	
+</html>

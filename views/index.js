@@ -2,6 +2,8 @@ var db = require('../middleware/db'),
 	session = require('express-session'),
 	utils = require('../middleware/utils');
 
+//FIX DISPLAYING IN longreads_edit PAGE
+
 exports.login_page = function (req, res) {
 	res.render('../template/login_page', {status: ""});
 };
@@ -15,8 +17,7 @@ exports.login_check_page = function (req, res) {
 
 	//console.log(login, ' ', pass);
 
-	db.get_user_by_login(login, function (query) {
-		var user = query.rows;
+	db.getUserByLogin(login, function (user) {
 		//console.log(user);
 		//Checking password
 		if (user.length === 0 || user[0].pass != pass) {
@@ -24,13 +25,32 @@ exports.login_check_page = function (req, res) {
 		} else {
 			console.log('User with login: ', login, ' logged in');
 			req.session.login = login;
-			res.redirect('/');
+			res.redirect('/edit');
 		}
 	});
 };
 
-exports.longread_creation = function(req, res) {
-	res.render('../template/longread_creation');
+exports.longread_editing = function(req, res) {
+	var id = 0;
+	res.render('../template/longread_creation', {id : id});
+};
+
+exports.longreads_list = function(req, res) {
+	db.getPublicatedLongreads(function(lrs) {
+		var titles = [],
+				ids = [],
+				authors = [],
+				descriptions = [];
+
+			for (var i = 0; i < lrs.length; i += 1) {
+				titles.push(lrs[i].title);
+				ids.push(lrs[i].id);
+				authors.push(lrs[i].author);
+				descriptions.push(lrs[i].description);
+			};
+
+			res.render('../template/longreads_list', {lr_titles: titles, lr_ids: ids, lr_authors: authors, lr_descriptions: descriptions});
+	});
 };
 
 /*exports.chats_page = function (req, res) {

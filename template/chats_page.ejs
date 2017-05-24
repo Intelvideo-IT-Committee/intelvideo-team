@@ -2,24 +2,24 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="/st/chats_page.css"> 
-		
+		<link rel="stylesheet" href="/st/chats_page.css">
+
 		<!--<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>-->
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-		
+
 		<script src="/st/chats_page.js"></script>
 		<script>
 			var names = [],
 				ids = [];
-			
+
 			<% for (var i = 0; i < chatnames.length; i += 1) { %>
 				names.push( "<%= chatnames[i] %>" );
 			<% } %>
-			
+
 			<% for (var i = 0; i < chatids.length; i += 1) { %>
 				ids.push( "<%= chatids[i] %>" );
 			<% } %>
-			
+
 			//console.log(names, ids);
 			get_chats(names, ids);
 		</script>
@@ -34,9 +34,9 @@
 				<br>
 				<button type="submit">Создать</button>
 			</form>
-		</div>		
+		</div>
 		<div id="chats_list">
-		
+
 		</div>
 	</body>
 </html>
