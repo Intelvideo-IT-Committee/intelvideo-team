@@ -1,30 +1,21 @@
-var main = require('../views');
-
-var check_cookies = function (req, res, next) {
-	if (req.session.login == undefined) {
-		res.redirect('/login');
-	} else {
-		next();
-	}
-};
+var main = require('../views/'),
+    admin = require('../views/admin.js');
 
 var check_authorization = function (req, res, next) {
-	if (req.session.login != undefined) {
-		res.redirect('/');
+	if (req.session.login == undefined) {
+		res.redirect('/admin/login');
 	} else {
 		next();
 	}
 };
 
-
 module.exports = function (app) {
-	//Writers side
-	app.get('/login', check_authorization, main.login_page);
-	app.post('/login', main.login_check_page);
-	//app.get('/longreads', check_cookies, main.unpublicated_longreads_list);
-	app.get('/edit', check_cookies, main.longread_editing);
-	//Readers side
-	app.get('/', main.longreads_list);
+	app.get('/admin/login', admin.login);
+	app.post('/admin/login', admin.check_login);
+    app.get('/admin/longreads', check_authorization, admin.longreads);
+	app.get('/admin/edit/:id/', check_authorization, admin.edit_longread);
+
+	app.get('/', main.longreads);
 
 	/*
 	app.get('/', check_cookies, main.chaSts_page);

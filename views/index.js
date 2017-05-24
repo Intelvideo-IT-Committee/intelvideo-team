@@ -35,7 +35,7 @@ exports.longread_editing = function(req, res) {
 	res.render('../template/longread_creation', {id : id});
 };
 
-exports.longreads_list = function(req, res) {
+exports.longreads = function(req, res) {
 	db.getPublicatedLongreads(function(lrs) {
 		var titles = [],
 				ids = [],
@@ -60,7 +60,7 @@ exports.longreads_list = function(req, res) {
 
 		var chatnames = [],
 			chatids = [];
-		for (var i = 0; i < chats.length; i += 1) {
+	 	         for (var i = 0; i < chats.length; i += 1) {
 			chatnames.push(chats[i].chatname);
 			chatids.push(chats[i].id);
 		};
