@@ -1,0 +1,21 @@
+.longread__field {
+    padding: 0 10px;
+
+    background-color: #FFF9E9;
+}
+
+.longread__field__title {
+    font-size: 36pt;
+    font-weight: bold;
+
+    font-family: 'PT Sans Caption';
+}
+
+.longread__field__body {
+    font-family: 'PT Serif';
+}
+
+.longread__field__body > p {
+    margin: 0;
+    padding: 5px 0;
+}

@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
+<head>
     <link rel="stylesheet" href="/st/longread_creation.css"></link>
     <!--Input editor scripts here-->
     <script src="/st/js/medium-editor.js"></script>
     <script>
-      var id = <%= id %>;
+    var id = <%= id %>;
+    var username = <%= username %>;
+
+    $.ajax(function () {});
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <div class="header">
 
     </div>
     <div class="longread__wrapper">
-      <div class="longread__field longread__field__title form" contenteditable="true">
-          Тьфу
-      </div>
-      <div class="longread__field longread__field__lead form" contenteditable="true">
-          Совершенно случайно мы наткнулись на такую вещь, блин
-      </div>
-      <div class="longread__field longread__field__body form editable" contenteditable="true">
-          <p>Test</p>
-      </div>
-      <script>
+        <div class="longread__field longread__field__title form" contenteditable="true">
+            <%= article.title %>Тьфу
+        </div>
+        <div class="longread__field longread__field__lead form" contenteditable="true">
+            <%= article.lead %>Совершенно случайно мы наткнулись на такую вещь, блин
+        </div>
+        <div class="longread__field longread__field__body form editable" contenteditable="true">
+            <%= article.body %><p>Test</p>
+        </div>
+        <div class="longread__field longread__field__time">4:20</div>
+        <script>
         var editor = new MediumEditor('.editable');
-      </script>
-      <button class="button__submit">
-        Save
-    </button>
+        </script>
+        <button class="button__submit">Сохранить</button>
     </div>
-  </body>
+</body>
 </html>
