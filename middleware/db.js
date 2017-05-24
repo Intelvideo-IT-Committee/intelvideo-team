@@ -82,6 +82,16 @@ exports.publicateLongread = (id, callback) => {
 	});
 };
 
+exports.getUnpublicatedLongreads = (callback) => {
+    var qstring = "SELECT * FROM longreads WHERE NOT published;";
+
+	__runRequest(qstring).then((result) => {
+		callback(result);
+	}).catch((err) => {
+		console.log("ERROR : ", err);
+	});
+}
+
 exports.getPublicatedLongreads = (callback) => {
 	var qstring = "SELECT * FROM longreads WHERE published;";
 

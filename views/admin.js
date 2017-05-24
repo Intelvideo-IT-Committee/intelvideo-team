@@ -2,6 +2,8 @@ var db = require('../middleware/db'),
 	session = require('express-session'),
 	utils = require('../middleware/utils');
 
+//   Administation's part
+
 exports.login = function (req, res) {
 	res.render('../template/login_page', {status: ""});
 };
@@ -26,8 +28,17 @@ exports.check_login = function (req, res) {
     });
 };
 
+
+//   Longread's part
+
 exports.longreads = function (req, res) {
-    res.redirect('/admin/edit/0');
+    //res.redirect('/admin/longread/edit/0');
+
+    db.getUnpublicatedLongreads(function (longreads) {
+        res.render('../template/longreads_list', {
+            articles: longreads
+        });
+    });
 };
 
 exports.edit_longread = function (req, res) {
@@ -36,13 +47,23 @@ exports.edit_longread = function (req, res) {
 
     res.render('../template/longread_creation', {
         id: id,
-        username: username
+        username: username,
+        article: {
+            title: "",
+            lead: "",
+            body: ""
+        }
     });
 
     /*db.getLongread(id, function (longread) {
         res.render('../template/longreads_list', {
             id: id,
-            username: username
+            username: username,
+            article: longread
         });
     })*/
+};
+
+exports.save_longread = function (req, res) {
+
 };
