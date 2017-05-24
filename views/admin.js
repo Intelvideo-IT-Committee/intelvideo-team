@@ -46,6 +46,7 @@ exports.edit_longread = function (req, res) {
         username = req.session.login;
 
     db.getLongread(id, function (longread) {
+        //console.log(longread.body);
         res.render('../template/longread_creation', {
             id: id,
             username: username,
@@ -60,7 +61,9 @@ exports.save_longread = function (req, res) {
         lead = req.body.lead,
         body = req.body.body;
 
+    //console.log(id, " saved", body);
+
     db.saveLongread(id, title, lead, body, function () {
-        response.send('true');
+        res.send('true');
     });
 };

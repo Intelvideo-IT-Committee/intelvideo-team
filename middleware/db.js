@@ -48,14 +48,14 @@ exports.createLongread = (author, date, status, callback) => {
 
 exports.saveLongread = (id, title, lead, body, callback) => {
 	var qstring = "UPDATE longreads SET title = '" + title + "', body = '" + body +
-		"', lead = '" + lead + "' WHERE id = " + id + ";"
+		"', lead = '" + lead + "' WHERE id = " + id + ";";
 
-		__runRequest(qstring).then(() => {
-			callback();
-		}).catch((err) => {
-			console.log("ERROR : ", err);
-			callback();
-		});
+	__runRequest(qstring).then(() => {
+		callback();
+	}).catch((err) => {
+		console.log("ERROR : ", err);
+		callback();
+	});
 };
 
 exports.getLongread = (id, callback) => {
