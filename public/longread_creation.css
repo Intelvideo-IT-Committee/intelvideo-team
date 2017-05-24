@@ -1,52 +1,70 @@
 body {
-  margin: 0px;
-  background-color: #f0f0f0;
+    margin: 0px;
+    background-color: #3D3D36;
 }
 
 .header {
-  width: 100vw;
-  height: 5vh;
-  background-color: grey;
+    width: 100vw;
+    height: 5vh;
+    background-color: grey;
 }
 
-.longread {
-  min-height: 92vh;
+.longread__wrapper {
+    min-height: 92vh;
 
-  width: 96vw;
-  height: auto;
+    width: 96vw;
+    height: auto;
 
-  padding-top: 2vh;
-  padding-left: 2vw;
-  padding-right: 2vw;
+    padding-top: 2vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 .form:hover {
-  border: 1px solid lightgrey;
+    border: 1px solid lightgrey;
 }
 
-.longread__name {
-  min-height: 5vh;
-  width: 96vw;
+.longread__field {
+    min-height: 5vh;
+    width: 96vw;
 
-  background-color: white;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-
-  text-align: center;
+    background-color: #FFF9E9;
 }
 
-.longread__tegs {
-  min-height: 5vh;
-  width: 96vw;
-
-  background-color: white;
+.longread__field__title {
+    font-size: 36pt;
+    font-weight: bold;
 }
 
-.longread__body {
-  min-height: 80vh;
-  width: 96vw;
+.longread__field__body {
+}
 
-  background-color: white;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+
+/* MEDIUM EDITOR */
+
+.medium-editor-toolbar {
+    visibility: hidden;
+}
+
+.medium-editor-toolbar-active {
+    visibility: visible;
+    position: absolute;
+}
+
+.medium-editor-toolbar-form {
+    visibility: hidden;
+}
+
+.medium-editor-toolbar-form-active {
+    visibility: visible;
+}
+
+.medium-editor-toolbar > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.medium-editor-toolbar > ul > li {
+    list-style: none;
+    float: left;
 }
