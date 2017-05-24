@@ -1,32 +1,37 @@
+ @import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700|PT+Sans:400,400i,700,700i|PT+Serif:400,400i,700,700i&subset=cyrillic');
+
 body {
     margin: 0px;
     background-color: #3D3D36;
+    font-family: 'PT Sans';
 }
 
-.header {
+/*.header {
     width: 100vw;
     height: 5vh;
     background-color: grey;
-}
+}*/
 
 .longread__wrapper {
     min-height: 92vh;
 
-    width: 96vw;
+    width: 96%;
     height: auto;
 
     padding-top: 2vh;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
-.form:hover {
+/*.form:hover {
     border: 1px solid lightgrey;
-}
+}*/
 
 .longread__field {
     min-height: 5vh;
-    width: 96vw;
+    /*width: 96vw;*/
+
+    padding: 0 10px;
 
     background-color: #FFF9E9;
 }
@@ -34,11 +39,18 @@ body {
 .longread__field__title {
     font-size: 36pt;
     font-weight: bold;
+
+    font-family: 'PT Sans Caption';
 }
 
 .longread__field__body {
+    font-family: 'PT Serif';
 }
 
+.longread__field__body > p {
+    margin: 0;
+    padding: 5px 0;
+}
 
 /* MEDIUM EDITOR */
 
