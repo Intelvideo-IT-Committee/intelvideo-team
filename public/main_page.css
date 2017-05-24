@@ -1,15 +1,60 @@
 .first-screen__wrapper {
     width: 100vw;
     height: 100vh;
-    background-color: #F8C62C;
+    background-color: #FFF9E9;
+    color: #3D3D36;
+}
+
+.first-screen__navbar {
+    border-bottom: 1px solid #3D3D36;
+    width: 100vw;
+}
+
+.first-screen__navbar > div {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.first-screen__navbar a {
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0 20px;
+    font-size: 24pt;
+    color: #3D3D36;
+}
+
+.first-screen__inner-wrapper {
+    width: 80vw;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
 }
 
 #first-screen__logo {
-    width: 40vw;
+    height: 70vh;
+    margin-top: 10vh;
+}
+
+.first-screen__vertical-line {
+    height: 60vh;
+    width: 0;
+    border-left: 1px solid #3D3D36;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 10vh;
 }
 
 .first-screen__about {
     width: 40vw;
-    border-left: 1px solid;
+}
+
+.second-screen__wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: #3D3D36;
+    color: #FFF9E9;
 }
