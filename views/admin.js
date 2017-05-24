@@ -45,7 +45,7 @@ exports.edit_longread = function (req, res) {
     var id = req.params.id,
         username = req.session.login;
 
-    res.render('../template/longread_creation', {
+    /*res.render('../template/longread_creation', {
         id: id,
         username: username,
         article: {
@@ -53,17 +53,24 @@ exports.edit_longread = function (req, res) {
             lead: "",
             body: ""
         }
-    });
+    });*/
 
-    /*db.getLongread(id, function (longread) {
-        res.render('../template/longreads_list', {
+    db.getLongread(id, function (longread) {
+        res.render('../template/longread_creation', {
             id: id,
             username: username,
             article: longread
         });
-    })*/
+    });
 };
 
 exports.save_longread = function (req, res) {
+    var id = req.body.id,
+        title = req.body.title,
+        lead = req.body.lead,
+        body = req.body.body;
 
+    db.saveLongread(id, title, lead, body, function () {
+        response.send('true');
+    });
 };

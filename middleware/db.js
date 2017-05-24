@@ -12,6 +12,8 @@ var Pool = require('pg').Pool,
 //
 //	FIX ERROR HANDLER IN CALLBACK'S FUNCTIONS
 //
+//  FIX LONGREAD PUBLICATION (COPY VALUES TO PUBLICATED VERSION)
+//
 
 //// Pass request string to the DB
 var __runRequest = function(qstring) {
@@ -33,7 +35,7 @@ var __runRequest = function(qstring) {
 //Longreads
 exports.createLongread = (author, date, status, callback) => {
 	var qstring = "INSERT INTO longreads VALUES";
-	qstring += " (' ', '" + author + "', '" + date + "', ' ', '" + status + "', DEFAULT)";
+	qstring += " (' ', '" + author + "', '" + date + "', ' ', '" + status + "', DEFAULT, '')";
 	qstring += " RETURNING id;"
 
 	__runRequest(qstring).then((result) => {
@@ -44,9 +46,9 @@ exports.createLongread = (author, date, status, callback) => {
 	});
 };
 
-exports.saveLongread = (id, title, content, callback) => {
-	var qstring = "UPDATE longreads SET title = '" + title + "', body = '" + content +
-		"' WHERE id = " + id + ";"
+exports.saveLongread = (id, title, lead, body, callback) => {
+	var qstring = "UPDATE longreads SET title = '" + title + "', body = '" + body +
+		"', lead = '" + lead + "' WHERE id = " + id + ";"
 
 		__runRequest(qstring).then(() => {
 			callback();
@@ -62,11 +64,12 @@ exports.getLongread = (id, callback) => {
 	__runRequest(qstring).then((result) => {
 		callback(result[0]);
 	}).catch((err) => {
-			console.log("ERROR : ", err);
-			callback(err);
+		console.log("ERROR : ", err);
+		callback(err);
 	});
 };
 
+//Need to fix
 exports.publicateLongread = (id, callback) => {
 	getLongread(id, function (result) {
 		createLongread(result.author, result.date, 'y', function(result) {
