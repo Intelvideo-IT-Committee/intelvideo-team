@@ -12,8 +12,8 @@ exports.login_check_page = function (req, res) {
 	var login = req.body.login, //User's login
 		pass = req.body.password; //User's password
 
-	login = utils.sanitize_user_info(login),
-		pass = utils.sanitize_user_info(pass);
+	login = utils.sanitize_info(login),
+		pass = utils.sanitize_info(pass);
 
 	//console.log(login, ' ', pass);
 
