@@ -45,16 +45,6 @@ exports.edit_longread = function (req, res) {
     var id = req.params.id,
         username = req.session.login;
 
-    /*res.render('../template/longread_creation', {
-        id: id,
-        username: username,
-        article: {
-            title: "",
-            lead: "",
-            body: ""
-        }
-    });*/
-
     db.getLongread(id, function (longread) {
         res.render('../template/longread_creation', {
             id: id,
