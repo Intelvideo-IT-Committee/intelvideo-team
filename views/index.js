@@ -3,22 +3,7 @@ var db = require('../middleware/db'),
 	utils = require('../middleware/utils');
 
 exports.longreads = function(req, res) {
-    //
-	/*db.getPublicatedLongreads(function(lrs) {
-		var titles = [],
-				ids = [],
-				authors = [],
-				descriptions = [];
-
-			for (var i = 0; i < lrs.length; i += 1) {
-				titles.push(lrs[i].title);
-				ids.push(lrs[i].id);
-				authors.push(lrs[i].author);
-				descriptions.push(lrs[i].description);
-			};
-
-			res.render('../template/longreads_list', {lr_titles: titles, lr_ids: ids, lr_authors: authors, lr_descriptions: descriptions});
-	});*/
+    res.render('../template/main_page');
 };
 
 /*exports.chats_page = function (req, res) {
