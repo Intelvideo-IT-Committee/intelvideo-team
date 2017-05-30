@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/st/longreads.css"></link>
     <link rel="stylesheet" href="/st/longread_creation.css"></link>
     <!--Input editor scripts here-->
-    <script src="/st/js/medium-editor.js"></script>
     <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/st/js/medium-editor.js"></script>
     <script>
     var id = <%= id %>;
     var username = "<%= username %>";
@@ -45,7 +46,16 @@
         </div>
         <div class="longread__field longread__field__time">4:20</div>
         <script>
-        var editor = new MediumEditor('.editable');
+        var editor = new MediumEditor('.editable', {
+            imageDragging: false
+        });
+
+        $( function() {
+            $( "#body" ).sortable({
+                placeholder: "ui-state-highlight",
+                cancel: "p,h2,h3,pre"
+            });
+        } );
         </script>
         <button onclick="submitPost();" class="button__submit">Сохранить</button>
     </div>
