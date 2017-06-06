@@ -32,15 +32,15 @@
 </head>
 <body>
     <!-- DRAG N DROP UPLOAD -->
-    <script src="//localhost:8080/st/js/vendor/jquery.ui.widget.js"></script>
-    <script src="//localhost:8080/st/js/jquery.iframe-transport.js"></script>
-    <script src="//localhost:8080/st/js/jquery.fileupload.js"></script>
+    <script src="//toshinux/st/js/vendor/jquery.ui.widget.js"></script>
+    <script src="//toshinux/st/js/jquery.iframe-transport.js"></script>
+    <script src="//toshinux/st/js/jquery.fileupload.js"></script>
 
     <input id="imgupload" type="file" name="pic" method="post">
     <script>
     $(function () {
         $('#imgupload').fileupload({
-            url: "http://127.0.0.1:8080/upload/",
+            url: "http://toshinux/upload/",
             dataType: 'json',
             submit: function(e, data) {
                 console.log('submit');
@@ -51,7 +51,7 @@
             done: function (e, data) {
                 console.log(e);
                 console.log(data);
-                $('#body').append("<img src='//localhost:8080" + data.result.url + "'>");
+                $('#body').append("<img src='//toshinux" + data.result.url + "'>");
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
