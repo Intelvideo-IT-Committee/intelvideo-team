@@ -12,9 +12,10 @@ var check_authorization = function (req, res, next) {
 module.exports = function (app) {
 	app.get('/admin/login', admin.login);
 	app.post('/admin/login', admin.check_login);
-    app.get('/admin/longreads', check_authorization, admin.longreads);
+    app.get('/admin/longread', check_authorization, admin.longreads);
 	app.get('/admin/longread/edit/:id/', check_authorization, admin.edit_longread);
     app.post('/admin/longread/save', check_authorization, admin.save_longread);
+    app.post('/admin/longread/publicate', check_authorization, admin.publicate_longread);
 
 	app.get('/', main.longreads);
 

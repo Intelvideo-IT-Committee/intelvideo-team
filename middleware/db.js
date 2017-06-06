@@ -41,7 +41,7 @@ exports.createLongread = (author, date, status, callback) => {
 	__runRequest(qstring).then((result) => {
 		callback(result[0].id);
 	}).catch((err) => {
-		console.log("ERROR : ", err);
+		console.log("DATABASE ERROR : ", err);
 		callback(err);
 	});
 };
@@ -53,7 +53,7 @@ exports.saveLongread = (id, title, lead, body, callback) => {
 	__runRequest(qstring).then(() => {
 		callback();
 	}).catch((err) => {
-		console.log("ERROR : ", err);
+		console.log("DATABASE ERROR : ", err);
 		callback();
 	});
 };
@@ -64,34 +64,30 @@ exports.getLongread = (id, callback) => {
 	__runRequest(qstring).then((result) => {
 		callback(result[0]);
 	}).catch((err) => {
-		console.log("ERROR : ", err);
+		console.log("DATABASE ERROR : ", err);
 		callback(err);
 	});
 };
 
 //Need to fix
 exports.publicateLongread = (id, callback) => {
-	getLongread(id, function (result) {
-		createLongread(result.author, result.date, 'y', function(result) {
-			var qstring = "UPDATE longreads SET public_id = " + result + " WHERE id = " + id + ";";
+	 var qstring = "UPDATE longreads SET published = 'y', public_id = (SELECT coalesce(MAX(public_id), 0) + 1 FROM longreads) WHERE id = " + id + ";";
 
-			__runRequest(qstring).then(() => {
-				callback();
-			}).catch((err) => {
-				console.log("ERROR : ", err);
-				callback();
-			});
-		});
-	});
+     __runRequest(qstring).then((result) => {
+         callback();
+     }).catch((err) => {
+         console.log("DATABASE ERROR : ", err);
+         callback(err);
+     })
 };
 
-exports.getUnpublicatedLongreads = (callback) => {
-    var qstring = "SELECT * FROM longreads WHERE NOT published;";
+exports.getLongreads = (callback) => {
+    var qstring = "SELECT * FROM longreads;";
 
 	__runRequest(qstring).then((result) => {
 		callback(result);
 	}).catch((err) => {
-		console.log("ERROR : ", err);
+		console.log("DATABASE ERROR : ", err);
 	});
 }
 
@@ -101,7 +97,7 @@ exports.getPublicatedLongreads = (callback) => {
 	__runRequest(qstring).then((result) => {
 		callback(result);
 	}).catch((err) => {
-		console.log("ERROR : ", err);
+		console.log("DATABASE ERROR : ", err);
 	});
 };
 
@@ -112,7 +108,7 @@ exports.getUserByLogin = (login, callback) => {
 	__runRequest(qstring).then((result) => {
 		callback(result);
 	}).catch((err) => {
-		console.log("ERROR : ", err);
+		console.log("DATABASE ERROR : ", err);
 		callback(err);
 	});
 };

@@ -34,7 +34,7 @@ exports.check_login = function (req, res) {
 exports.longreads = function (req, res) {
     //res.redirect('/admin/longread/edit/0');
 
-    db.getUnpublicatedLongreads(function (longreads) {
+    db.getLongreads(function (longreads) {
         res.render('../template/longreads_list', {
             articles: longreads
         });
@@ -67,3 +67,11 @@ exports.save_longread = function (req, res) {
         res.send('true');
     });
 };
+
+exports.publicate_longread = function (req, res) {
+    var id = req.body.id;
+
+    db.publicateLongread(id, function () {
+        res.send('true');
+    });
+}
