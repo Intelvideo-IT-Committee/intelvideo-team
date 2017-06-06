@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <a href="/admin/longread/create" class="longread-list__btn__create">Создать лонгрид</button>
     <% for (var i = 0; i < articles.length; i+= 1) { %>
         <div class="longread__wrapper">
             <a href="/admin/longread/edit/<%= articles[i].id %>">
@@ -22,17 +23,17 @@
             <div class="longread__field__lead">
                 <%= articles[i].lead %>
             </div>
-            <div class="longread__info">
-                <div class="longread__info__author">
+            <div class="longread__field__info">
+                <div class="longread__field__author">
                     <%= articles[i].author %>
                 </div>
-                <div class="longread__info__date">
+                <div class="longread__field__date">
                     <%= articles[i].date %>
                 </div>
             </div>
         </div>
+        <a class="longread-list__btn__publish" href="/admin/longread/publish/<%= articles[i].id %>">Опубликовать</a>
     <% } %>
-    <a href="/admin/longread/create" class="longread-list__btn__create">Создать лонгрид</button>
 </body>
 
 </html>
