@@ -5,6 +5,14 @@
     margin-bottom: 20px;
 }
 
+.longread__wrapper > a {
+    text-decoration: none;
+}
+
+.longread__wrapper > a:hover {
+    text-decoration: underline ;
+}
+
 .longread__field {
     padding: 0 10px;
 
