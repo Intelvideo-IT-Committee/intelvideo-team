@@ -8,18 +8,18 @@
 </head>
 <body>
     <div class="longread__wrapper">
-        <div id="title" class="longread__field longread__field__title form" contenteditable="true">
+        <div id="title" class="longread__field longread__field__title form">
             <%= article.title %>
         </div>
-        <div id="lead" class="longread__field longread__field__lead form" contenteditable="true">
+        <div id="lead" class="longread__field longread__field__lead form">
             <%= article.lead %>
         </div>
-        <div id="body" class="longread__field longread__field__body form editable" contenteditable="true">
+        <div id="body" class="longread__field longread__field__body form editable">
             <%- article.body %>
         </div>
         <div class="longread__field__info">
-            <div class="longread__field longread__field__time"><%- article.date %></div>
             <div class="longread__field longread__field__author"><%- article.author %></div>
+            <div class="longread__field longread__field__date"><%- article.date %></div>
         </div>
     </div>
 </body>
