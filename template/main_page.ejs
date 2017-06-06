@@ -35,7 +35,7 @@
             <div class="second-screen__longread-list__wrapper">
                 <% for (var i = 0; i < articles.length; i+= 1) { %>
                     <div class="longread__wrapper">
-                        <a href="/longread/<%= articles[i].id %>">
+                        <a href="/longread/<%= articles[i].public_id %>">
                             <div class="longread__field__title">
                                 <%= articles[i].title %>
                             </div>
@@ -43,12 +43,12 @@
                         <div class="longread__field__lead">
                             <%= articles[i].lead %>
                         </div>
-                        <div class="longread__info">
-                            <div class="longread__info__author">
-                                Александор Пистолетов
+                        <div class="longread__field__info">
+                            <div class="longread__field__author">
+                                <%= articles[i].author %>
                             </div>
-                            <div class="longread__info__date">
-                                9 ноября 1917 года
+                            <div class="longread__field__date">
+                                <%= articles[i].date %>
                             </div>
                         </div>
                     </div>

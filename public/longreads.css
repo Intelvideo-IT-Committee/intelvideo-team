@@ -1,6 +1,8 @@
 .longread__wrapper {
     color: #3D3D39;
     background-color: #FFF9E9;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .longread__field {
@@ -12,7 +14,8 @@
 .longread__field__title {
     font-size: 36pt;
     font-weight: bold;
-
+    text-decoration-line: none!important;
+    color: #3D3D39;
     font-family: 'PT Sans Caption';
 }
 
@@ -23,4 +26,21 @@
 .longread__field__body > p {
     margin: 0;
     padding: 5px 0;
+}
+
+.longread__field__info {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.longread__field__author {
+    font-style: italic;
+}
+
+
+.longread__field__date {
+    font-style: italic;
+    font-weight: bold;
 }
