@@ -55,6 +55,16 @@ exports.edit_longread = function (req, res) {
     });
 };
 
+exports.create_longread = function(req, res) {
+    var username = req.session.login,
+        time = utils.get_time();
+
+    db.createLongread(username, time, function(id) {
+        console.log("Created longread " + id + " by " + username);
+        res.redirect('/admin/longread/edit/' + id);
+    });
+};
+
 exports.save_longread = function (req, res) {
     var id = req.body.id,
         title = req.body.title,

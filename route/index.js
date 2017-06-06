@@ -13,7 +13,8 @@ module.exports = function (app) {
 	app.get('/admin/login', admin.login);
 	app.post('/admin/login', admin.check_login);
     app.get('/admin/longread', check_authorization, admin.longreads);
-	app.get('/admin/longread/edit/:id/', check_authorization, admin.edit_longread);
+	app.get('/admin/longread/edit/:id', check_authorization, admin.edit_longread);
+    app.get('/admin/longread/create', check_authorization, admin.create_longread);
     app.post('/admin/longread/save', check_authorization, admin.save_longread);
     app.post('/admin/longread/publicate', check_authorization, admin.publicate_longread);
 

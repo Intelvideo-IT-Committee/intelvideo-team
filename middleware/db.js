@@ -33,9 +33,9 @@ var __runRequest = function(qstring) {
 
 //// Prepare request string
 //Longreads
-exports.createLongread = (author, date, status, callback) => {
+exports.createLongread = (author, date, callback) => {
 	var qstring = "INSERT INTO longreads VALUES";
-	qstring += " (' ', '" + author + "', '" + date + "', ' ', '" + status + "', DEFAULT, '')";
+	qstring += " (' ', '" + author + "', '" + date + "', ' ', 'n', DEFAULT, '')";
 	qstring += " RETURNING id;"
 
 	__runRequest(qstring).then((result) => {
