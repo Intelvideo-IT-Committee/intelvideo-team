@@ -5,7 +5,7 @@ var db = require('../middleware/db'),
 exports.longreads = function(req, res) {
     db.getPublicatedLongreads(function (longreads) {
         res.render('../template/main_page', {
-            articles: longreads;
+            articles: longreads
         });
     });
 };
