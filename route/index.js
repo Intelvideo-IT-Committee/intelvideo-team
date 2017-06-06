@@ -16,7 +16,7 @@ module.exports = function (app) {
 	app.get('/admin/longread/edit/:id', check_authorization, admin.edit_longread);
     app.get('/admin/longread/create', check_authorization, admin.create_longread);
     app.post('/admin/longread/save', check_authorization, admin.save_longread);
-    app.post('/admin/longread/publicate', check_authorization, admin.publicate_longread);
+    app.get('/admin/longread/publish/:id', check_authorization, admin.publicate_longread);
 
 	app.get('/', main.longreads);
     app.get('/longread/:id', main.longread);

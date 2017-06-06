@@ -79,7 +79,7 @@ exports.save_longread = function (req, res) {
 };
 
 exports.publicate_longread = function (req, res) {
-    var id = req.body.id;
+    var id = req.params.id;
 
     db.publicateLongread(id, function () {
         res.send('true');
