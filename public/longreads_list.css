@@ -22,3 +22,18 @@ a {
 .longread__title {
 
 }
+
+.longread-list__btn__create {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 36pt;
+    border: 2px solid #FFF9E9;
+    border-radius: 10px;
+    padding: 5px 20px;
+    text-align: center;
+    width: 400px;
+
+    color: #FFF9E9;
+}
