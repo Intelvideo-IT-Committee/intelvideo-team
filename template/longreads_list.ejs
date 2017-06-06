@@ -13,7 +13,7 @@
 
 <body>
     <% for (var i = 0; i < articles.length; i+= 1) { %>
-        <div class="longread">
+        <div class="longread__wrapper">
             <a href="/admin/longread/edit/<%= articles[i].id %>">
                 <div class="longread__field__title">
                     <%= articles[i].title %>
@@ -24,10 +24,10 @@
             </div>
             <div class="longread__info">
                 <div class="longread__info__author">
-                    Александор Пистолетов
+                    <%= articles[i].author %>
                 </div>
                 <div class="longread__info__date">
-                    9 ноября 1917 года
+                    <%= articles[i].date %>
                 </div>
             </div>
         </div>
