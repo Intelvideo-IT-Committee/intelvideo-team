@@ -17,25 +17,25 @@ var Pool = require('pg').Pool,
 
 //// Pass request string to the DB
 var __runRequest = function(qstring) {
-	return new Promise((resolve, reject) => {
-		pool.query(qstring, function (err, result) {
-			//console.log('db.js:20', result);
-      if(err) {
-				console.log("DB request:");
-        console.log(qstring);
-        console.log(JSON.stringify(err));
-        reject(err);
-      }
-      resolve(result.rows);
-		});
-	});
+    return new Promise((resolve, reject) => {
+        pool.query(qstring, function (err, result) {
+		//console.log('db.js:20', result);
+        if(err) {
+            console.log("DB request:");
+            console.log(qstring);
+            console.log(JSON.stringify(err));
+            reject(err);
+        }
+            resolve(result.rows);
+        });
+    });
 }
 
 //// Prepare request string
 //Longreads
 exports.createLongread = (author, date, callback) => {
 	var qstring = "INSERT INTO longreads VALUES";
-	qstring += " (' ', '" + author + "', '" + date + "', ' ', 'n', DEFAULT, '')";
+	qstring += " (' ', '" + author + "', '" + date + "', ' ', 'n', DEFAULT, null, ' ')";
 	qstring += " RETURNING id;"
 
 	__runRequest(qstring).then((result) => {
