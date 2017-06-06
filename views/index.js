@@ -3,7 +3,11 @@ var db = require('../middleware/db'),
 	utils = require('../middleware/utils');
 
 exports.longreads = function(req, res) {
-    res.render('../template/main_page');
+    db.getPublicatedLongreads(function (longreads) {
+        res.render('../template/main_page', {
+            articles: longreads;
+        });
+    });
 };
 
 /*exports.chats_page = function (req, res) {
