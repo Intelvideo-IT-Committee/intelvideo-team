@@ -19,6 +19,7 @@ module.exports = function (app) {
     app.post('/admin/longread/publicate', check_authorization, admin.publicate_longread);
 
 	app.get('/', main.longreads);
+    app.get('/longread/:id', main.longread);
 
 	/*
 	app.get('/', check_cookies, main.chaSts_page);

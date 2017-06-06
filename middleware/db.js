@@ -69,7 +69,17 @@ exports.getLongread = (id, callback) => {
 	});
 };
 
-//Need to fix
+exports.getLongreadByPublicId = (public_id, callback) => {
+    var qstring = "SELECT * FROM longreads WHERE public_id = " + public_id + ";";
+
+	__runRequest(qstring).then((result) => {
+		callback(result[0]);
+	}).catch((err) => {
+		console.log("DATABASE ERROR : ", err);
+		callback(err);
+	});
+};
+
 exports.publicateLongread = (id, callback) => {
 	 var qstring = "UPDATE longreads SET published = 'y', public_id = (SELECT coalesce(MAX(public_id), 0) + 1 FROM longreads) WHERE id = " + id + ";";
 

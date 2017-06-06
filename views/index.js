@@ -10,6 +10,16 @@ exports.longreads = function(req, res) {
     });
 };
 
+exports.longread = function(req, res) {
+    var id = req.params.id;
+
+    db.getLongreadByPublicId(id, function (longread) {
+        res.render('../template/longread_page.ejs', {
+            article: longread
+        });
+    });
+};
+
 /*exports.chats_page = function (req, res) {
 	db.get_chats(function (query) {
 		var chats = query.rows;
