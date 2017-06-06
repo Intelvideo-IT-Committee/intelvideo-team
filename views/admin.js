@@ -23,7 +23,7 @@ exports.check_login = function (req, res) {
         } else {
             console.log(login, " has logged in");
             req.session.login = login;
-            res.redirect('/admin/longreads');
+            res.redirect('/admin/longread');
         }
     });
 };
