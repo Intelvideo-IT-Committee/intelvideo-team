@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="/st/main.css"></link>
+    <link rel="stylesheet" href="/st/longreads.css"></link>
+    <link rel="stylesheet" href="/st/longread_creation.css"></link>
+</head>
+<body>
+    <div class="longread__wrapper">
+        <div id="title" class="longread__field longread__field__title form" contenteditable="true">
+            <%= article.title %>
+        </div>
+        <div id="lead" class="longread__field longread__field__lead form" contenteditable="true">
+            <%= article.lead %>
+        </div>
+        <div id="body" class="longread__field longread__field__body form editable" contenteditable="true">
+            <%- article.body %>
+        </div>
+        <div class="longread__field longread__field__time"><%- article.date %></div>
+        <div class="longread__field longread__field__author"><%- article.author %></div>
+    </div>
+</body>
+</html>
